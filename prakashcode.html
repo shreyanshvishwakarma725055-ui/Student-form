@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Free Fire Top-Up Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin:0;
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-family:Arial, sans-serif;
+            background: url('A_form_is_displayed_over_an_action-packed_Free_Fir.png') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background: rgba(0,0,0,0.5);
+            z-index:0;
+        }
+
+        .form-box {
+            position: relative;
+            z-index:1;
+            background: rgba(0,0,0,0.7);
+            width:90%;
+            max-width:400px;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.5);
+            color:white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+            text-shadow: 0 0 5px #fff;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin:8px 0;
+            border:none;
+            border-radius:6px;
+            font-size:14px;
+            transition: 0.3s;
+        }
+
+        input::placeholder{
+            color:#ccc;
+        }
+
+        input:focus{
+            outline:none;
+            box-shadow: 0 0 8px #1E90FF;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#1E90FF;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:16px;
+            cursor:pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px #1E90FF;
+        }
+
+        button:hover{
+            background:#187bcd;
+            box-shadow: 0 0 20px #00f;
+        }
+
+        /* Fancy popup */
+        #successPopup {
+            position: fixed;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            background:#1E90FF;
+            color:white;
+            padding:20px 30px;
+            border-radius:12px;
+            font-size:18px;
+            display:none;
+            z-index:999;
+            box-shadow: 0 0 20px #00f;
+            text-align:center;
+            animation: popupFade 0.5s ease-in-out;
+        }
+
+        @keyframes popupFade{
+            0%{transform:translate(-50%, -60%); opacity:0;}
+            100%{transform:translate(-50%, -50%); opacity:1;}
+        }
+
+        @keyframes fadeIn{
+            0%{opacity:0; transform:translateY(-20px);}
+            100%{opacity:1; transform:translateY(0);}
+        }
+
+        /* Mobile adjustments */
+        @media(max-width:500px){
+            .form-box{
+                padding:20px;
+            }
+            input{
+                font-size:13px;
+            }
+            body{
+                background-size: cover;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="form-box">
+        <h2>Free Fire Top-Up Form</h2>
+
+        <form id="myForm" action="https://sheetdb.io/api/v1/u6gofj5hpzd2q" method="post">
+            <input type="text" name="Free Fire UID" placeholder="Free Fire UID" required>
+            <input type="text" name="Free Fire ID" placeholder="Free Fire ID" required>
+            <input type="number" name="Diamond Amour" placeholder="Diamond Amount" required>
+            <input type="email" name="Gmail" placeholder="Gmail" required>
+            <input type="text" name="In-Game Name" placeholder="In-Game Name" required>
+            <input type="number" name="ID Level" placeholder="ID Level" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="successPopup">✅ thanks diamond recive in 60 minut!</div>
+
+    <script>
+        const form = document.getElementById("myForm");
+        const popup = document.getElementById("successPopup");
+
+        form.addEventListener("submit", function(e){
+            e.preventDefault();
+
+            const formData = {
+                data: {
+                    "Free Fire UID": form["Free Fire UID"].value,
+                    "Free Fire ID": form["Free Fire ID"].value,
+                    "Diamond Amour": form["Diamond Amour"].value,
+                    "Gmail": form["Gmail"].value,
+                    "In-Game Name": form["In-Game Name"].value,
+                    "ID Level": form["ID Level"].value
+                }
+            };
+
+            fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                popup.style.display = "block";
+                setTimeout(()=> popup.style.display = "none", 2000);
+                form.reset();
+            })
+            .catch(err => {
+                console.log(err);
+                alert("Error Saving Data ❌ Check console");
+            });
+        });
+    </script>
+</body>
+</html>
