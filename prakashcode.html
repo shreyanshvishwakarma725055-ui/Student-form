@@ -114,28 +114,7 @@ form.addEventListener("submit", function(e){
 </script>
 
 </body>
-</html>    <div id="successPopup">✅ thanks diamond recive in 60 minut!</div>
-
-    <script>
-        const form = document.getElementById("myForm");
-        const popup = document.getElementById("successPopup");
-
-        form.addEventListener("submit", function(e){
-            e.preventDefault();
-
-            const formData = {
-                data: {
-                    "Free Fire UID": form["Free Fire UID"].value,
-                    "Free Fire ID": form["Free Fire ID"].value,
-                    "Diamond Amour": form["Diamond Amour"].value,
-                    "Gmail": form["Gmail"].value,
-                    "In-Game Name": form["In-Game Name"].value,
-                    "ID Level": form["ID Level"].value
-                }
-            };
-
-            fetch(form.action, {
-                method: "POST",
+</html                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json"
