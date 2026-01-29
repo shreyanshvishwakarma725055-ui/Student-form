@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Made by Shreyansh</title>
+
+<style>
+:root{
+  --red:#dc2626;
+  --dark:#7f1d1d;
+  --card:#ffffff;
+  --text:#1f2937;
+  --radius:14px;
+  --shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI, Arial, sans-serif;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:linear-gradient(180deg,#dc2626,#991b1b);
+  color:#fff;
+}
+
+/* NAVBAR */
+header{
+  position:sticky;
+  top:0;
+  background:rgba(127,29,29,.95);
+  backdrop-filter:blur(8px);
+  z-index:100;
+}
+.navbar{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-weight:700;
+  letter-spacing:.5px;
+}
+.nav-links{
+  display:flex;
+  gap:20px;
+}
+.nav-links a{
+  color:#fff;
+  text-decoration:none;
+  position:relative;
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  width:0;
+  height:2px;
+  background:#fff;
+  transition:.3s;
+}
+.nav-links a:hover::after{width:100%;}
+
+/* SECTIONS */
+section{
+  padding:80px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+h1{font-size:clamp(34px,5vw,50px);}
+h2{margin-bottom:14px;font-size:clamp(26px,4vw,34px);}
+
+.hero{text-align:center;}
+.hero p{margin-top:15px;font-size:18px;opacity:.95;}
+
+/* CARD */
+.box{
+  background:var(--card);
+  color:var(--text);
+  border-radius:var(--radius);
+  padding:26px;
+  box-shadow:var(--shadow);
+  margin-top:20px;
+}
+
+/* GAME */
+.mode-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+button{
+  padding:11px 20px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg,#dc2626,#ef4444);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(220,38,38,.5);
+  transition:.25s;
+}
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(220,38,38,.7);
+}
+
+.board{
+  display:grid;
+  grid-template-columns:repeat(3,90px);
+  gap:10px;
+  justify-content:center;
+  margin:25px 0;
+}
+.cell{
+  width:90px;
+  height:90px;
+  background:#fee2e2;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+  font-weight:700;
+  cursor:pointer;
+}
+.cell:hover{background:#fecaca;}
+
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+.card{
+  background:#fff;
+  color:#111;
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+/* FORMS */
+.form{
+  background:#fff;
+  color:#111;
+  padding:30px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+input,textarea{
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #fca5a5;
+  outline:none;
+}
+input:focus,textarea:focus{
+  border-color:#dc2626;
+  box-shadow:0 0 0 3px rgba(220,38,38,.25);
+}
+
+.status-msg{
+  margin-top:10px;
+  font-weight:600;
+}
+
+/* FOOTER */
+footer{
+  background:#7f1d1d;
+  text-align:center;
+  padding:18px;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .board{grid-template-columns:repeat(3,70px);}
+  .cell{width:70px;height:70px;}
+  .nav-links{gap:14px;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="logo">Made by Shreyansh</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#games">Games</a>
+      <a href="#forms">Forms</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <h1>Welcome 👋</h1>
+  <p>Welcome to my website, made by Shreyansh.  
+     Here you can play games, fill forms, and explore more.</p>
+</section>
+
+<section id="about">
+  <h2>About</h2>
+  <div class="box">
+    This website is created by <b>Shreyansh</b> for learning,
+    fun, games and interaction. Clean design, strong UI,
+    and beginner-friendly.
+  </div>
+</section>
+
+<section id="games">
+  <h2>Games</h2>
+
+  <div class="box">
+    <h3>Tic Tac Toe</h3>
+    <div class="mode-buttons">
+      <button onclick="setMode('single')">Single Player</button>
+      <button onclick="setMode('multi')">Multiplayer</button>
+    </div>
+
+    <p id="turn">Player X Turn</p>
+
+    <div class="board">
+      <div class="cell" onclick="move(0)"></div>
+      <div class="cell" onclick="move(1)"></div>
+      <div class="cell" onclick="move(2)"></div>
+      <div class="cell" onclick="move(3)"></div>
+      <div class="cell" onclick="move(4)"></div>
+      <div class="cell" onclick="move(5)"></div>
+      <div class="cell" onclick="move(6)"></div>
+      <div class="cell" onclick="move(7)"></div>
+      <div class="cell" onclick="move(8)"></div>
+    </div>
+
+    <p id="status"></p>
+    <button onclick="resetGame()">Restart</button>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">🎮 Single Player Games (Coming Soon)</div>
+    <div class="card">👥 Multiplayer Games (Coming Soon)</div>
+    <div class="card">🃏 More Games (Future)</div>
+  </div>
+</section>
+
+<section id="forms">
+  <h2>Invite / Participation</h2>
+
+  <form class="form" id="inviteForm">
+    <input name="data[name]" placeholder="Name" required>
+    <input name="data[email]" type="email" placeholder="Email" required>
+    <textarea name="data[message]" rows="4" placeholder="Purpose / Message" required></textarea>
+    <input type="hidden" name="data[type]" value="Invite Form">
+    <button type="submit">Submit</button>
+    <div class="status-msg" id="inviteStatus"></div>
+  </form>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+
+  <form class="form" id="contactForm">
+    <input name="data[name]" placeholder="Name" required>
+    <input name="data[email]" type="email" placeholder="Email" required>
+    <textarea name="data[message]" rows="4" placeholder="Message" required></textarea>
+    <input type="hidden" name="data[type]" value="Contact Form">
+    <button type="submit">Send Message</button>
+    <div class="status-msg" id="contactStatus"></div>
+  </form>
+</section>
+
+<footer>
+  © 2026 Made by Shreyansh
+</footer>
+
+<script>
+/* ===== SHEETDB FORM SUBMIT ===== */
+const API="https://sheetdb.io/api/v1/saefpdfk11l1o";
+
+function handleForm(formId,statusId){
+  const form=document.getElementById(formId);
+  const status=document.getElementById(statusId);
+
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    status.innerText="Sending...";
+
+    fetch(API,{
+      method:"POST",
+      body:new FormData(form)
+    })
+    .then(res=>res.json())
+    .then(()=>{
+      status.innerText="Submitted Successfully ✅";
+      form.reset();
+    })
+    .catch(()=>{
+      status.innerText="Error ❌ Try again";
+    });
+  });
+}
+
+handleForm("inviteForm","inviteStatus");
+handleForm("contactForm","contactStatus");
+
+/* ===== TIC TAC TOE ===== */
+let board=["","","","","","","","",""];
+let player="X",gameOver=false,mode="single";
+const cells=document.querySelectorAll(".cell");
+const statusText=document.getElementById("status");
+const turn=document.getElementById("turn");
+
+function setMode(m){mode=m;resetGame();}
+function move(i){
+  if(board[i]||gameOver)return;
+  board[i]=player;cells[i].innerText=player;
+  if(checkWin()){statusText.innerText=`Player ${player} Wins 🎉`;gameOver=true;return;}
+  if(!board.includes("")){statusText.innerText="Draw 😐";gameOver=true;return;}
+  player=player==="X"?"O":"X";
+  turn.innerText=`Player ${player} Turn`;
+  if(mode==="single"&&player==="O")setTimeout(botMove,400);
+}
+function botMove(){
+  let e=board.map((v,i)=>v===""?i:null).filter(v=>v!==null);
+  move(e[Math.floor(Math.random()*e.length)]);
+}
+function checkWin(){
+  return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+  .some(p=>p.every(i=>board[i]===player));
+}
+function resetGame(){
+  board=["","","","","","","","",""];
+  cells.forEach(c=>c.innerText="");
+  player="X";gameOver=false;
+  statusText.innerText="";
+  turn.innerText="Player X Turn";
+}
+</script>
+
+</body>
+  </html>
